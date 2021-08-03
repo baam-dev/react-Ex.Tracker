@@ -24,6 +24,7 @@ function App() {
   return (
     <div>
       <h2>Let's get started!</h2>
+      {/* using same component multiple times, with different data*/}
       <ExpenseItem
         title={expenses[0].title}
         amount={expenses[0].amount}
