@@ -13,6 +13,20 @@ function Expenses(props) {
   const filteredExpenses = props.items.filter((expense) => {
     return expense.date.getFullYear().toString() === filteredYear;
   });
+  // expenseContent has a default value, that gets displayed when
+  // filteredExpense is empty
+  let expenseContent = <p>No expenses found! </p>;
+  // But if there is a name on that place, then render the item as below
+  if (filteredExpenses.length > 0) {
+    expenseContent = filteredExpenses.map((expense) => (
+      <ExpenseItem
+        key={expense.id}
+        title={expense.title}
+        amount={expense.amount}
+        date={expense.date}
+      />
+    ));
+  }
   return (
     <div>
       <Card className="expenses">
@@ -20,14 +34,8 @@ function Expenses(props) {
           selected={filteredYear}
           onChangeFilter={filterChangeHandler}
         />
-        {filteredExpenses.map((expense) => (
-          <ExpenseItem
-            key={expense.id}
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-          />
-        ))}
+        {/* 1. point to expenseContent variable */}
+        {expenseContent}
       </Card>
     </div>
   );
